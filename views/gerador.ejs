@@ -1,0 +1,28 @@
+
+<%- include('partials/header'); -%>
+<body>
+    <%- include('partials/navbar'); -%>     
+    <div class="container">
+        <label for="story">Tabelas</label>
+        <div class="row">           
+            <div id="bottoes">                 
+                <% tabelas1.tabelas.forEach((tag) => { %> 
+                    <a href="<%=tag%>">
+                    <button type="button" class="btn btn-primary"><%=tag%></button>
+                    </a>                  
+                <%}) %>                              
+            </div>
+            <br>
+        
+            <form method="POST" action="/salvarpergunta">              
+                <button class="btn btn-success">Perguntar</button>
+            </form> 
+
+            <br>
+            <textarea id="idtabelas" rows="5" cols="33">                                                                       
+                <% tabelas.tabelas %> 
+            </textarea>          
+        </div>
+    </div>
+</body>
+<%- include('partials/footer'); -%>

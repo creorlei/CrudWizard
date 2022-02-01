@@ -1,0 +1,67 @@
+<%- include('partials/header'); -%>
+<body>
+    <%- include('partials/navbar'); -%>     
+    <div class="container">        
+        <form id='dados' onsubmit="enviarsubmit(); return false;">         
+        <label for="story">Propriedades 1 moedas </label>
+        <div class="row">  
+        <div class="form-group col-md-2">
+      <label ="edtid">id</label>
+      <input CLASS="form-control" ID="edtid"  name="id" data-fieldname="id" data-type="int" placeholder="id"  value="id" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtusuario">usuario</label>
+      <input CLASS="form-control" ID="edtusuario"  name="usuario" data-fieldname="usuario" data-type="int" placeholder="usuario"  value="usuario" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtpar">par</label>
+      <input CLASS="form-control" ID="edtpar"  name="par" data-fieldname="par" data-type="text" placeholder="par"  value="par" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtqtde">qtde</label>
+      <input CLASS="form-control" ID="edtqtde"  name="qtde" data-fieldname="qtde" data-type="double" placeholder="qtde"  value="qtde" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtdescricao">descricao</label>
+      <input CLASS="form-control" ID="edtdescricao"  name="descricao" data-fieldname="descricao" data-type="text" placeholder="descricao"  value="descricao" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtvcompra">vcompra</label>
+      <input CLASS="form-control" ID="edtvcompra"  name="vcompra" data-fieldname="vcompra" data-type="double" placeholder="vcompra"  value="vcompra" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtvvenda">vvenda</label>
+      <input CLASS="form-control" ID="edtvvenda"  name="vvenda" data-fieldname="vvenda" data-type="double" placeholder="vvenda"  value="vvenda" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtcreatedAt">createdAt</label>
+      <input CLASS="form-control" ID="edtcreatedAt"  name="createdAt" data-fieldname="createdAt" data-type="datetime" placeholder="createdAt"  value="createdAt" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtupdatedAt">updatedAt</label>
+      <input CLASS="form-control" ID="edtupdatedAt"  name="updatedAt" data-fieldname="updatedAt" data-type="datetime" placeholder="updatedAt"  value="updatedAt" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtteste">teste</label>
+      <input CLASS="form-control" ID="edtteste"  name="teste" data-fieldname="teste" data-type="double" placeholder="teste"  value="teste" TYPE="text" data-gravar=1> 		          
+      </div>            
+        <button class="btn btn-success">Salvar</button>        
+        </div>
+        </form>            
+    </div>
+    <script>    
+      function enviarsubmit()     
+      {    
+          var data =  document.querySelectorAll('input[type=text]');        
+          var jJSON={inputs:[]}          
+          for (i=0;i<data.length;i++)
+          {
+            var str=data[i];                        
+            jJSON.inputs.push({
+                  "id"   : str.id,
+                  "valor": document.querySelector('[id="'+str.id+'"]').value,
+                  "type" : str.type,
+                  "fieldname":str.getAttribute('data-fieldname'),
+                  "gravar" :str.getAttribute('data-gravar')
+                })            
+          }                   
+          console.log(jJSON);                              
+          axios.post('/moedas', jJSON)          
+          .then(req=>{ 'console.log(req)'  })
+          .catch(error => {console.log(error)})  
+      }                    
+
+    </script>
+</body>
+<%- include('partials/footer'); -%>

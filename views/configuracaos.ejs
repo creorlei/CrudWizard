@@ -1,0 +1,70 @@
+<%- include('partials/header'); -%>
+<body>
+    <%- include('partials/navbar'); -%>     
+    <div class="container">        
+        <form id='dados' onsubmit="enviarsubmit(); return false;">         
+        <label for="story">Propriedades 1 configuracaos </label>
+        <div class="row">  
+        <div class="form-group col-md-2">
+      <label ="edtid">id</label>
+      <input CLASS="form-control" ID="edtid"  name="id" data-fieldname="id" data-type="int" placeholder="id"  value="id" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtusuario">usuario</label>
+      <input CLASS="form-control" ID="edtusuario"  name="usuario" data-fieldname="usuario" data-type="int" placeholder="usuario"  value="usuario" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtchave_key">chave_key</label>
+      <input CLASS="form-control" ID="edtchave_key"  name="chave_key" data-fieldname="chave_key" data-type="text" placeholder="chave_key"  value="chave_key" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtuser_key">user_key</label>
+      <input CLASS="form-control" ID="edtuser_key"  name="user_key" data-fieldname="user_key" data-type="text" placeholder="user_key"  value="user_key" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edttelegram_chave_key">telegram_chave_key</label>
+      <input CLASS="form-control" ID="edttelegram_chave_key"  name="telegram_chave_key" data-fieldname="telegram_chave_key" data-type="text" placeholder="telegram_chave_key"  value="telegram_chave_key" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edttelegram_user_key">telegram_user_key</label>
+      <input CLASS="form-control" ID="edttelegram_user_key"  name="telegram_user_key" data-fieldname="telegram_user_key" data-type="text" placeholder="telegram_user_key"  value="telegram_user_key" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtganho">ganho</label>
+      <input CLASS="form-control" ID="edtganho"  name="ganho" data-fieldname="ganho" data-type="double" placeholder="ganho"  value="ganho" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtvenda">venda</label>
+      <input CLASS="form-control" ID="edtvenda"  name="venda" data-fieldname="venda" data-type="double" placeholder="venda"  value="venda" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtcompra">compra</label>
+      <input CLASS="form-control" ID="edtcompra"  name="compra" data-fieldname="compra" data-type="double" placeholder="compra"  value="compra" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtcreatedAt">createdAt</label>
+      <input CLASS="form-control" ID="edtcreatedAt"  name="createdAt" data-fieldname="createdAt" data-type="datetime" placeholder="createdAt"  value="createdAt" TYPE="text" data-gravar=1> 		          
+      </div><div class="form-group col-md-2">
+      <label ="edtupdatedAt">updatedAt</label>
+      <input CLASS="form-control" ID="edtupdatedAt"  name="updatedAt" data-fieldname="updatedAt" data-type="datetime" placeholder="updatedAt"  value="updatedAt" TYPE="text" data-gravar=1> 		          
+      </div>            
+        <button class="btn btn-success">Salvar</button>        
+        </div>
+        </form>            
+    </div>
+    <script>    
+      function enviarsubmit()     
+      {    
+          var data =  document.querySelectorAll('input[type=text]');        
+          var jJSON={inputs:[]}          
+          for (i=0;i<data.length;i++)
+          {
+            var str=data[i];                        
+            jJSON.inputs.push({
+                  "id"   : str.id,
+                  "valor": document.querySelector('[id="'+str.id+'"]').value,
+                  "type" : str.type,
+                  "fieldname":str.getAttribute('data-fieldname'),
+                  "gravar" :str.getAttribute('data-gravar')
+                })            
+          }                   
+          console.log(jJSON);                              
+          axios.post('/configuracaos', jJSON)          
+          .then(req=>{ 'console.log(req)'  })
+          .catch(error => {console.log(error)})  
+      }                    
+
+    </script>
+</body>
+<%- include('partials/footer'); -%>

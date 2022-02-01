@@ -1,0 +1,40 @@
+<%- include('partials/header'); -%>
+<body>
+    <%- include('partials/navbar'); -%>     
+    <div class="container">        
+        <form id='dados' onsubmit="enviarsubmit(); return false;">         
+        <label for="story">Propriedades 1 new_table </label>
+        <div class="row">  
+        <div class="form-group col-md-2">
+      <label ="edtteswt">teswt</label>
+      <input CLASS="form-control" ID="edtteswt"  name="teswt" data-fieldname="teswt" data-type="int" placeholder="teswt"  value="teswt" TYPE="text" data-gravar=1> 		          
+      </div>            
+        <button class="btn btn-success">Salvar</button>        
+        </div>
+        </form>            
+    </div>
+    <script>    
+      function enviarsubmit()     
+      {    
+          var data =  document.querySelectorAll('input[type=text]');        
+          var jJSON={inputs:[]}          
+          for (i=0;i<data.length;i++)
+          {
+            var str=data[i];                        
+            jJSON.inputs.push({
+                  "id"   : str.id,
+                  "valor": document.querySelector('[id="'+str.id+'"]').value,
+                  "type" : str.type,
+                  "fieldname":str.getAttribute('data-fieldname'),
+                  "gravar" :str.getAttribute('data-gravar')
+                })            
+          }                   
+          console.log(jJSON);                              
+          axios.post('/new_table', jJSON)          
+          .then(req=>{ 'console.log(req)'  })
+          .catch(error => {console.log(error)})  
+      }                    
+
+    </script>
+</body>
+<%- include('partials/footer'); -%>
